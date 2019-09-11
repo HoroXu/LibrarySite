@@ -5,12 +5,16 @@ import AxiosData from "@/utils/axios";
 const Header = () => {
   return (
     <div className="library-bottom">
-      <div>
-        <span>首页</span>
-        <span>入馆指南</span>
-        <span>关于我们</span>
+      <div className='library-bottom-inner'>
+        <div className='left-info menuFont'>
+          <span className='menu-item '>首页</span>
+          <span className='menu-item'>入馆指南</span>
+          <span className='menu-item'>关于我们</span>
+        </div>
+        <div className='right-info menu-item'>登录</div>
       </div>
-      <div>登录</div>
     </div>
   );
 };
+
+export default Header;

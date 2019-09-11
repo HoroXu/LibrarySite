@@ -8,6 +8,8 @@ import "./config/common.less";
 import RouteMap from "./Route";
 import { connect } from "react-redux";
 import Bottom from "./component/Bottom";
+import Header from "./component/Header";
+import LogoImg from './component/LogoImg'
 
 @connect(
   mapStateToProps,
@@ -29,11 +31,13 @@ export default class App extends Component {
     console.log(this.state.defaultHeight, "默认高速-======");
     return (
       <div>
+        <Header />
+        <LogoImg/>
         <div style={{ minHeight: this.state.defaultHeight - 156 }}>
           <RouteMap />
         </div>
 
-        {/* <Bottom /> */}
+        <Bottom />
       </div>
     );
   }

@@ -4,7 +4,7 @@ import "./App.less";
 import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
-import HisPage from "./views/HisPage/hook";
+import SearchModule from "./views/SearchModule";
 import HisDetail from "./views/HisDetail/hook";
 
 @connect(
@@ -22,11 +22,11 @@ export default class App extends Component {
       <Router>
         <Switch>
           <React.Fragment>
-            <Route exact path="/" component={HisPage} />
+            <Route exact path="/" component={SearchModule} />
 
             <Layout>
               <div className="dip-content">
-                <Route path="/hisPage" component={HisPage} />
+                {/* <Route path="/" component={SearchModule} /> */}
                 <Route path="/hisDetail" component={HisDetail} />
               </div>
             </Layout>

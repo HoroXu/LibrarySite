@@ -3,10 +3,12 @@ import "./index.less";
 import AxiosData from "@/utils/axios";
 import LogoImg from "../../assets/images/logo-img.jpg";
 
-const Header = () => {
+const LogoImgComponent = () => {
   return (
     <div className="library-logo-img">
-      <img src={LogoImg} />
+      <img className='img-area' src={LogoImg} />
     </div>
   );
 };
+
+export default LogoImgComponent 
