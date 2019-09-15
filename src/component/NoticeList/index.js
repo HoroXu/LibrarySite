@@ -75,7 +75,11 @@ const NoticeList = props => {
               );
             })}
           </ul>
-          <Link to="">
+          <Link
+            to={{
+              pathname: `moreTable/${headerTitle}`
+            }}
+          >
             <div className="see-more">MORE > ></div>
           </Link>
         </div>
@@ -83,7 +87,11 @@ const NoticeList = props => {
         <div className="navigation-container">
           {navigationImgArr.map((item, index) => {
             return (
-              <Link to="">
+              <Link
+                to={{
+                  pathname: `moreTable/${headerTitle}`
+                }}
+              >
                 <div className="navigation-item">
                   <img src={item.imgSrc} className="navigation-img" />
                   <div className="img-name">{item.imgName}</div>

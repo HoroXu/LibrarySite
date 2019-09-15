@@ -5,7 +5,7 @@ import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import SearchModule from "./views/SearchModule";
-import HisDetail from "./views/HisDetail/hook";
+import MoreTable from "./views/MoreTable";
 
 @connect(
   mapStateToProps,
@@ -27,7 +27,7 @@ export default class App extends Component {
             <Layout>
               <div className="dip-content">
                 {/* <Route path="/" component={SearchModule} /> */}
-                <Route path="/hisDetail" component={HisDetail} />
+                <Route path="/moreTable" component={MoreTable} />
               </div>
             </Layout>
           </React.Fragment>
