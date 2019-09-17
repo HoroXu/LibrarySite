@@ -8,23 +8,33 @@ import CopyImg from "@/component/CopyImg";
 
 const { Search } = Input;
 const { TabPane } = Tabs;
+const tabArr = [
+  { tabName: "知网", tabId: 1 },
+  { tabName: "泉方学术搜索", tabId: 2 },
+  { tabName: "本地PubMed", tabId: 3 },
+  { tabName: "节目检索", tabId: 4 }
+];
 const SearchModule = () => {
   return (
     <div className="main-area">
       <div className="search-module-area">
         <div className="search-module-container">
           <Tabs defaultActiveKey="1" onChange>
-            <TabPane tab="Tab 1" key="1"></TabPane>
-            <TabPane tab="Tab 2" key="2"></TabPane>
-            <TabPane tab="Tab 3" key="3"></TabPane>
+            {tabArr.map((item, index) => {
+              return (
+                <TabPane tab={item.tabName} key={item.tabId}>
+                  <Search
+                    placeholder="请输入关键字..."
+                    enterButton="检索"
+                    size="large"
+                    onSearch={(value, tabId) => console.log(value, item.tabId)}
+                    style={{ width: 620 }}
+                  />
+                </TabPane>
+              );
+            })}
           </Tabs>
-          <Search
-            placeholder="请输入关键字..."
-            enterButton="检索"
-            size="large"
-            onSearch={value => console.log(value)}
-            style={{ width: 620 }}
-          />
+
           <img src={Keyword} className="keyword-img" />
         </div>
       </div>

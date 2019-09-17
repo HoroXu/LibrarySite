@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Menu,Pagination } from "antd";
 import "./index.less";
 
-const MoreTable = (props) => {
+const MoreTable = props => {
   const tableContent = [
     {
       content: "中秋节放假通知",
@@ -25,18 +26,33 @@ const MoreTable = (props) => {
     }
   ];
 
-  console.log(props.location.pathname.split('/')[2], "this.props.location=============");
+  console.log(
+    props.location.pathname.split("/")[2],
+    "this.props.location============="
+  );
+
+  function switchTab(e) {
+    console.log(e, "查看切换====");
+  }
   return (
     <div className="more-table-container">
       <div className="position-area">
         <span>当前位置：</span>
-        <span className='first-page'>图书馆首页</span>
-        <span className='now-page'>{props.location.pathname.split('/')[2]}</span>
+        <span className="first-page">图书馆首页</span>
+        <span className="now-page">
+          {props.location.pathname.split("/")[2]}
+        </span>
       </div>
       <div className="more-table-content">
-        <div className="navigation-area">1</div>
+        <Menu mode="inline" style={{ width: 185 }} onClick={e => switchTab(e)}>
+          <Menu.Item key="5">外文资源</Menu.Item>
+          <Menu.Item key="6">中文资源</Menu.Item>
+          <Menu.Item key="7">电子书</Menu.Item>
+        </Menu>
         <div className="table-list-area">
-          <h3 className="table-list-title">{props.location.pathname.split('/')[2]}</h3>
+          <h3 className="table-list-title">
+            {props.location.pathname.split("/")[2]}
+          </h3>
           <ul className="main-list">
             {tableContent.map((item, index) => {
               return (
@@ -47,6 +63,8 @@ const MoreTable = (props) => {
               );
             })}
           </ul>
+
+          <Pagination total={50} className='pagination-area' />
         </div>
       </div>
     </div>
