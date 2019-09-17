@@ -10,6 +10,7 @@ import { connect } from "react-redux";
 import Bottom from "./component/Bottom";
 import Header from "./component/Header";
 import LogoImg from './component/LogoImg'
+import SideBar from './component/SideBar'
 
 @connect(
   mapStateToProps,
@@ -38,6 +39,8 @@ export default class App extends Component {
         </div>
 
         <Bottom />
+
+        <SideBar/>
       </div>
     );
   }
