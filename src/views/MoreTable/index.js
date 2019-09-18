@@ -42,6 +42,8 @@ const MoreTable = props => {
     { tableTitle: "定题检索" }
   ];
 
+  const topTitleArr = [{ tableTitle: "入馆指南" }, { tableTitle: "关于我们" }];
+
   console.log(
     props.location.pathname.split("/")[2],
     "this.props.location============="
@@ -50,26 +52,32 @@ const MoreTable = props => {
   function switchTab(e) {
     console.log(e, "查看切换====");
   }
+
+  const judgeParam =
+    props.location.pathname.split("/")[2] ||
+    props.location.pathname.split("/")[1];
   return (
     <div className="more-table-container">
       <div className="position-area">
         <span>当前位置：</span>
         <span className="first-page">图书馆首页</span>
-        <span className="now-page">
-          {props.location.pathname.split("/")[2]}
-        </span>
+        <span className="now-page">{judgeParam}</span>
       </div>
       <div className="more-table-content">
         <Menu
           mode="inline"
           style={{ width: 185 }}
           onClick={e => switchTab(e)}
-          defaultSelectedKeys={[props.location.pathname.split("/")[2]]}
+          defaultSelectedKeys={[judgeParam]}
         >
-          {"外文资源中文资源电子书".indexOf(
-            props.location.pathname.split("/")[2]
-          ) > -1
+          {"外文资源中文资源电子书".indexOf(judgeParam) > -1
             ? tableTitleArr.map((item, index) => {
+                return (
+                  <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
+                );
+              })
+            : "aboutUshandbook".indexOf(judgeParam) > -1
+            ? topTitleArr.map((item, index) => {
                 return (
                   <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
                 );
@@ -79,14 +87,9 @@ const MoreTable = props => {
                   <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
                 );
               })}
-          {/* <Menu.Item key="外文资源">外文资源</Menu.Item>
-          <Menu.Item key="中文资源">中文资源</Menu.Item>
-          <Menu.Item key="电子书">电子书</Menu.Item> */}
         </Menu>
         <div className="table-list-area">
-          <h3 className="table-list-title">
-            {props.location.pathname.split("/")[2]}
-          </h3>
+          <h3 className="table-list-title">{judgeParam}</h3>
           <ul className="main-list">
             {tableContent.map((item, index) => {
               return (

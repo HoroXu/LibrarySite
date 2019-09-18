@@ -28,6 +28,10 @@ export default class App extends Component {
               <div className="dip-content">
                 {/* <Route path="/" component={SearchModule} /> */}
                 <Route path="/moreTable" component={MoreTable} />
+                {/* 关于我们 */}
+                <Route path="/aboutUs" component={MoreTable} />
+                {/* 入馆指南 */}
+                <Route path="/handbook" component={MoreTable} />
               </div>
             </Layout>
           </React.Fragment>
