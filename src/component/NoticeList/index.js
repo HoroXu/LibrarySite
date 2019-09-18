@@ -89,7 +89,7 @@ const NoticeList = props => {
             return (
               <Link
                 to={{
-                  pathname: `moreTable/${headerTitle}`
+                  pathname: `moreTable/${item.imgName}`
                 }}
               >
                 <div className="navigation-item">

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Menu,Pagination } from "antd";
+import { Menu, Pagination } from "antd";
 import "./index.less";
 
 const MoreTable = props => {
@@ -26,6 +26,22 @@ const MoreTable = props => {
     }
   ];
 
+  const tableTitleArr = [
+    { tableTitle: "外文资源" },
+    { tableTitle: "中文资源" },
+    { tableTitle: "电子书" }
+  ];
+  const navigationTitleArr = [
+    { tableTitle: "查新服务" },
+    { tableTitle: "读者培训" },
+    { tableTitle: "精准查重" },
+    { tableTitle: "查收查引" },
+    { tableTitle: "核心期刊" },
+    { tableTitle: "信息简报" },
+    { tableTitle: "机构库" },
+    { tableTitle: "定题检索" }
+  ];
+
   console.log(
     props.location.pathname.split("/")[2],
     "this.props.location============="
@@ -44,10 +60,28 @@ const MoreTable = props => {
         </span>
       </div>
       <div className="more-table-content">
-        <Menu mode="inline" style={{ width: 185 }} onClick={e => switchTab(e)}>
-          <Menu.Item key="5">外文资源</Menu.Item>
-          <Menu.Item key="6">中文资源</Menu.Item>
-          <Menu.Item key="7">电子书</Menu.Item>
+        <Menu
+          mode="inline"
+          style={{ width: 185 }}
+          onClick={e => switchTab(e)}
+          defaultSelectedKeys={[props.location.pathname.split("/")[2]]}
+        >
+          {"外文资源中文资源电子书".indexOf(
+            props.location.pathname.split("/")[2]
+          ) > -1
+            ? tableTitleArr.map((item, index) => {
+                return (
+                  <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
+                );
+              })
+            : navigationTitleArr.map((item, index) => {
+                return (
+                  <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
+                );
+              })}
+          {/* <Menu.Item key="外文资源">外文资源</Menu.Item>
+          <Menu.Item key="中文资源">中文资源</Menu.Item>
+          <Menu.Item key="电子书">电子书</Menu.Item> */}
         </Menu>
         <div className="table-list-area">
           <h3 className="table-list-title">
@@ -64,7 +98,7 @@ const MoreTable = props => {
             })}
           </ul>
 
-          <Pagination total={50} className='pagination-area' />
+          <Pagination total={50} className="pagination-area" />
         </div>
       </div>
     </div>

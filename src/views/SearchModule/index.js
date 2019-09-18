@@ -61,7 +61,7 @@ const SearchModule = () => {
             widthParam={250}
           />
           <NoticeList
-            headerTitle="外文资源"
+            headerTitle="中文资源"
             contentList={[
               { id: 11, name: "UpToDate临床顾问", time: "2019-09-04" },
               {
@@ -81,7 +81,7 @@ const SearchModule = () => {
             widthParam={250}
           />
           <NoticeList
-            headerTitle="外文资源"
+            headerTitle="电子书"
             contentList={[
               { id: 11, name: "UpToDate临床顾问", time: "2019-09-04" },
               {
