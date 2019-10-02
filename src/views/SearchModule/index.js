@@ -1,11 +1,13 @@
 import React, { Component, useState, useEffect } from "react";
-import { Input, Tabs } from "antd";
+import { Input, Tabs,Select } from "antd";
 import "./index.less";
 import AxiosData from "@/utils/axios";
 import Keyword from "../../assets/images/keyword.png";
 import NoticeList from "../../component/NoticeList";
 import CopyImg from "@/component/CopyImg";
 
+const InputGroup = Input.Group;
+const { Option } = Select;
 const { Search } = Input;
 const { TabPane } = Tabs;
 const tabArr = [
@@ -19,7 +21,7 @@ const SearchModule = () => {
     <div className="main-area">
       <div className="search-module-area">
         <div className="search-module-container">
-          <Tabs defaultActiveKey="1" onChange>
+          {/* <Tabs defaultActiveKey="1" onChange>
             {tabArr.map((item, index) => {
               return (
                 <TabPane tab={item.tabName} key={item.tabId}>
@@ -33,8 +35,23 @@ const SearchModule = () => {
                 </TabPane>
               );
             })}
-          </Tabs>
+          </Tabs> */}
 
+          <InputGroup compact className='input-group-container'>
+            <Select defaultValue="1"  size="large" style={{ width: 120 }}>
+              <Option value="1">知网</Option>
+              <Option value="2">泉方学术搜索</Option>
+              <Option value="3">本地PubMed</Option>
+              <Option value="4">节目检索</Option>
+            </Select>
+            <Search
+              placeholder="请输入关键字..."
+              enterButton="检索"
+              size="large"
+              onSearch={(value, tabId) => console.log(value, item.tabId)}
+              style={{ width: 490 }}
+            />
+          </InputGroup>
           <img src={Keyword} className="keyword-img" />
         </div>
       </div>
