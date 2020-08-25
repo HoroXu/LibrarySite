@@ -34,9 +34,7 @@ module.exports = {
     proxy: {
       "/": {
         target:
-          "http://47.100.245.81:80", //pre环境
-
-
+          "http://lib.tlytsg.com", //pre环境
         secure: true,
         changeOrigin: true
       }

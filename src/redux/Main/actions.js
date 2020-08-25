@@ -1,8 +1,8 @@
 import * as type from './action-type';
 
-export const sidebarCreator = value => {
+export const queryChannelInfo = value => {
     return {
-        type:type.SIDEBAR,
+        type:type.CHANNELINFO,
         payload:value
     }
 }

@@ -56,7 +56,7 @@ const NoticeList = props => {
     }
   ];
   return (
-    <div className="notice-list-container" style={{ width: widthParam }}>
+    <div className="notice-list-container mt15" style={{ width: widthParam }}>
       <h2 className="notice-list-header">{headerTitle}</h2>
       {typeParam === 0 ? (
         <div>

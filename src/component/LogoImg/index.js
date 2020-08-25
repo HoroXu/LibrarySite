@@ -1,14 +1,32 @@
-import React, { Component, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./index.less";
+import { showLogoUrl } from "@/config/urls";
 import AxiosData from "@/utils/axios";
 import LogoImg from "../../assets/images/logo-img.jpg";
 
 const LogoImgComponent = () => {
+
+  const [logoImg,setLogoImg] = useState('')
+  //获取logo接口
+  const queryLogoImg = () => {
+    AxiosData.get(showLogoUrl)
+      .then((res) => {
+        setLogoImg(res.logoImgPath)
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    queryLogoImg()
+  }, []);
   return (
     <div className="library-logo-img">
-      <img className='img-area' src={LogoImg} />
+      <img className="img-area" src={LogoImg} />
     </div>
   );
 };
 
-export default LogoImgComponent 
+export default LogoImgComponent;

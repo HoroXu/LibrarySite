@@ -1,36 +1,34 @@
 import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
 import { Menu, Pagination } from "antd";
 import "./index.less";
 
-const MoreTable = props => {
+const MoreTable = (props) => {
   const tableContent = [
     {
       content: "中秋节放假通知",
-      time: "2019-09-04"
+      time: "2019-09-04",
     },
     {
       content: "图书馆关于PubMedPlus数据库个人注册的通知",
-      time: "2019-09-06"
+      time: "2019-09-06",
     },
     {
       content: "百度教育云和百度文库平台试用通知",
-      time: "2019-09-01"
+      time: "2019-09-01",
     },
     {
       content: "紧急通知：万方数据平台暂时不能登录",
-      time: "2019-09-07"
+      time: "2019-09-07",
     },
     {
       content: "妇幼分院图书馆开馆公告",
-      time: "2019-09-03"
-    }
+      time: "2019-09-03",
+    },
   ];
 
-  const tableTitleArr = [
-    { tableTitle: "外文资源" },
-    { tableTitle: "中文资源" },
-    { tableTitle: "电子书" }
-  ];
+  const tableTitleArr = props.channelInfoArr.slice(0, 2);
+
   const navigationTitleArr = [
     { tableTitle: "查新服务" },
     { tableTitle: "读者培训" },
@@ -39,7 +37,7 @@ const MoreTable = props => {
     { tableTitle: "核心期刊" },
     { tableTitle: "信息简报" },
     { tableTitle: "机构库" },
-    { tableTitle: "定题检索" }
+    { tableTitle: "定题检索" },
   ];
 
   const topTitleArr = [{ tableTitle: "入馆指南" }, { tableTitle: "关于我们" }];
@@ -67,7 +65,7 @@ const MoreTable = props => {
         <Menu
           mode="inline"
           style={{ width: 185 }}
-          onClick={e => switchTab(e)}
+          onClick={(e) => switchTab(e)}
           defaultSelectedKeys={[judgeParam]}
         >
           {"外文资源中文资源电子书".indexOf(judgeParam) > -1
@@ -108,4 +106,17 @@ const MoreTable = props => {
   );
 };
 
-export default MoreTable;
+function mapStateToProps(state) {
+  return {
+    channelInfoArr: state.channelInfoArr,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoreTable);
