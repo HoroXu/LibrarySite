@@ -2,6 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Input, Tabs, Select } from "antd";
 import { connect } from "react-redux";
 import "./index.less";
+import { showArticleDirectoryUrl } from "@/config/urls";
 import AxiosData from "@/utils/axios";
 import Keyword from "../../assets/images/keyword.png";
 import NoticeList from "../../component/NoticeList";
@@ -37,6 +38,10 @@ const SearchModule = (props) => {
       return 0;
     }
   };
+
+
+
+
   return (
     <div className="main-area">
       <div className="search-module-area">
@@ -82,22 +87,9 @@ const SearchModule = (props) => {
               <NoticeList
                 headerTitle={item.channelName}
                 widthParam={queryWidthParam(index)}
-                contentList={[
-                  { id: 11, name: "UpToDate临床顾问", time: "2019-09-04" },
-                  {
-                    id: 12,
-                    name: "医知网（外文文献推送平台）",
-                    time: "2019-09-06",
-                  },
-                  {
-                    id: 13,
-                    name: " pubmedplus（外文文献聚合分析投稿指南）",
-                    time: "2019-09-08",
-                  },
-                  { id: 14, name: "UpToDate临床顾问", time: "2019-09-04" },
-                ]}
                 timeParam={false}
                 typeParam={queryTypeParam(index)}
+                channelId={item.id}
                 // widthParam={250}
               />
             );

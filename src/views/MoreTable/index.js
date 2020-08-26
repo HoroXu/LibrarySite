@@ -1,9 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Menu, Pagination } from "antd";
+import AxiosData from "@/utils/axios";
+import moment from "moment";
+import { showArticleDirectoryUrl } from "@/config/urls";
 import "./index.less";
 
 const MoreTable = (props) => {
+  console.log(props, "moretable数据======");
+  const { channelId } = props;
+
   const tableContent = [
     {
       content: "中秋节放假通知",
@@ -42,11 +48,6 @@ const MoreTable = (props) => {
 
   const topTitleArr = [{ tableTitle: "入馆指南" }, { tableTitle: "关于我们" }];
 
-  console.log(
-    props.location.pathname.split("/")[2],
-    "this.props.location============="
-  );
-
   function switchTab(e) {
     console.log(e, "查看切换====");
   }
@@ -54,6 +55,28 @@ const MoreTable = (props) => {
   const judgeParam =
     props.location.pathname.split("/")[2] ||
     props.location.pathname.split("/")[1];
+
+  const [contentListState, setContentListState] = useState([]);
+  const [pageNum, setPageNum] = useState("1");
+  //获取文章列表
+  const queryArticleDirectory = () => {
+    AxiosData.get(showArticleDirectoryUrl, {
+      channelId,
+      currentPage: pageNum,
+    })
+      .then((res) => {
+        console.log(res);
+        setContentListState(res.rowList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    queryArticleDirectory();
+  }, []);
+
   return (
     <div className="more-table-container">
       <div className="position-area">
@@ -89,11 +112,15 @@ const MoreTable = (props) => {
         <div className="table-list-area">
           <h3 className="table-list-title">{judgeParam}</h3>
           <ul className="main-list">
-            {tableContent.map((item, index) => {
+            {contentListState.map((item, index) => {
               return (
                 <li className="single-item">
-                  <span className="single-item-content">{item.content}</span>
-                  <span className="single-item-time">{item.time}</span>
+                  <span className="single-item-content">
+                    {item.articleTitle}
+                  </span>
+                  <span className="single-item-time">
+                    {moment(item.updateDate).format("YYYY-MM-DD")}
+                  </span>
                 </li>
               );
             })}
@@ -109,6 +136,7 @@ const MoreTable = (props) => {
 function mapStateToProps(state) {
   return {
     channelInfoArr: state.channelInfoArr,
+    channelId: state.channelId,
   };
 }
 

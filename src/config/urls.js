@@ -2,7 +2,11 @@
 export const showLogoUrl = "showLogo.do";
 
 //友情链接
-export const showAllLinkUrl = 'showAllLink.do'
+export const showAllLinkUrl = "showAllLink.do";
 
 //渠道信息
-export const showAllChannelUrl = 'showAllChannel.do'
+export const showAllChannelUrl = "showAllChannel.do";
+
+//文章列表
+
+export const showArticleDirectoryUrl = "showArticleDirectory.do";

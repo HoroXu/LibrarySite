@@ -6,3 +6,12 @@ export const queryChannelInfo = value => {
         payload:value
     }
 }
+
+//记录选中的channelId
+
+export const queryChannelId = value => {
+    return {
+        type: type.CHANNELID,
+        channelId:value
+    }
+}

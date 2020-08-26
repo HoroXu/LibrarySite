@@ -8,3 +8,12 @@ export const channelInfoArr = (state = [], action) => {
       return state;
   }
 };
+
+export const channelId = (state = "", action) => {
+  switch (action.type) {
+    case type.CHANNELID:
+      return action.channelId;
+    default:
+      return state;
+  }
+};
