@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Menu, Pagination } from "antd";
+import { Menu, Pagination, Table } from "antd";
+import { Link } from "react-router-dom";
 import AxiosData from "@/utils/axios";
 import moment from "moment";
 import { showArticleDirectoryUrl } from "@/config/urls";
@@ -8,7 +9,7 @@ import "./index.less";
 
 const MoreTable = (props) => {
   console.log(props, "moretable数据======");
-  const { channelId } = props;
+  const { channelId, channelInfoArr } = props;
 
   const tableContent = [
     {
@@ -47,6 +48,22 @@ const MoreTable = (props) => {
   ];
 
   const topTitleArr = [{ tableTitle: "入馆指南" }, { tableTitle: "关于我们" }];
+  const columns = [
+    {
+      title: "标题",
+      dataIndex: "articleTitle",
+      render: (text, record) => {
+        return <Link to="/" className='title-style'>{text}</Link>;
+      },
+    },
+    {
+      title: "时间",
+      dataIndex: "updateDate",
+      render: (text, record) => {
+        return <span>{moment(text).format("YYYY-MM-DD")}</span>;
+      },
+    },
+  ];
 
   function switchTab(e) {
     console.log(e, "查看切换====");
@@ -58,23 +75,32 @@ const MoreTable = (props) => {
 
   const [contentListState, setContentListState] = useState([]);
   const [pageNum, setPageNum] = useState("1");
+
+  const [totalRows, setTotalRows] = useState(0);
   //获取文章列表
-  const queryArticleDirectory = () => {
+  const queryArticleDirectory = (currentPage) => {
     AxiosData.get(showArticleDirectoryUrl, {
       channelId,
-      currentPage: pageNum,
+      currentPage,
     })
       .then((res) => {
         console.log(res);
         setContentListState(res.rowList);
+        setTotalRows(res.totalRows);
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
+  //改变页码
+
+  const changePage = (page) => {
+    queryArticleDirectory(page);
+  };
+
   useEffect(() => {
-    queryArticleDirectory();
+    queryArticleDirectory("1");
   }, []);
 
   return (
@@ -87,11 +113,11 @@ const MoreTable = (props) => {
       <div className="more-table-content">
         <Menu
           mode="inline"
-          style={{ width: 185 }}
+          style={{ width: 185 ,marginRight:40}}
           onClick={(e) => switchTab(e)}
           defaultSelectedKeys={[judgeParam]}
         >
-          {"外文资源中文资源电子书".indexOf(judgeParam) > -1
+          {/* {"外文资源中文资源电子书".indexOf(judgeParam) > -1
             ? tableTitleArr.map((item, index) => {
                 return (
                   <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
@@ -107,11 +133,22 @@ const MoreTable = (props) => {
                 return (
                   <Menu.Item key={item.tableTitle}>{item.tableTitle}</Menu.Item>
                 );
-              })}
+              })} */}
+
+          {channelInfoArr.map((item, index) => {
+            return (
+              <Menu.Item key={item.channelName}>{item.channelName}</Menu.Item>
+            );
+          })}
         </Menu>
         <div className="table-list-area">
           <h3 className="table-list-title">{judgeParam}</h3>
-          <ul className="main-list">
+          <Table
+            columns={columns}
+            dataSource={contentListState}
+            showHeader={false}
+          />
+          {/* <ul className="main-list">
             {contentListState.map((item, index) => {
               return (
                 <li className="single-item">
@@ -124,9 +161,14 @@ const MoreTable = (props) => {
                 </li>
               );
             })}
-          </ul>
+          </ul> */}
 
-          <Pagination total={50} className="pagination-area" />
+          <Pagination
+            total={totalRows}
+            className="pagination-area"
+            onChange={changePage}
+            hideOnSinglePage={true}
+          />
         </div>
       </div>
     </div>
