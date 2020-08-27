@@ -53,7 +53,11 @@ const MoreTable = (props) => {
       title: "标题",
       dataIndex: "articleTitle",
       render: (text, record) => {
-        return <Link to="/" className='title-style'>{text}</Link>;
+        return (
+          <Link to="/" className="title-style">
+            {text}
+          </Link>
+        );
       },
     },
     {
@@ -113,7 +117,7 @@ const MoreTable = (props) => {
       <div className="more-table-content">
         <Menu
           mode="inline"
-          style={{ width: 185 ,marginRight:40}}
+          style={{ width: 185, marginRight: 40 }}
           onClick={(e) => switchTab(e)}
           defaultSelectedKeys={[judgeParam]}
         >
@@ -142,11 +146,16 @@ const MoreTable = (props) => {
           })}
         </Menu>
         <div className="table-list-area">
-          <h3 className="table-list-title">{judgeParam}</h3>
+          {/* <h3 className="table-list-title">{judgeParam}</h3> */}
           <Table
             columns={columns}
             dataSource={contentListState}
             showHeader={false}
+            pagination={{
+              total: totalRows,
+              onChange: changePage,
+              hideOnSinglePage: true,
+            }}
           />
           {/* <ul className="main-list">
             {contentListState.map((item, index) => {
@@ -163,12 +172,12 @@ const MoreTable = (props) => {
             })}
           </ul> */}
 
-          <Pagination
+          {/* <Pagination
             total={totalRows}
             className="pagination-area"
             onChange={changePage}
             hideOnSinglePage={true}
-          />
+          /> */}
         </div>
       </div>
     </div>

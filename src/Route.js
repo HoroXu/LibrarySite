@@ -5,6 +5,7 @@ import { HashRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { connect } from "react-redux";
 import SearchModule from "./views/SearchModule";
 import MoreTable from "./views/MoreTable";
+import DetailPage from "./views/DetailPage";
 
 import { queryChannelInfo } from "@/redux/Main/actions";
 import { showAllChannelUrl } from "@/config/urls";
@@ -34,11 +35,17 @@ const App = (props) => {
           <Layout>
             <div className="dip-content">
               {/* <Route path="/" component={SearchModule} /> */}
+              
               <Route path="/moreTable" component={MoreTable} />
+
               {/* 关于我们 */}
               <Route path="/aboutUs" component={MoreTable} />
+
               {/* 入馆指南 */}
               <Route path="/handbook" component={MoreTable} />
+
+              {/* 详情页面 */}
+              <Route path="/detail" component={DetailPage} />
             </div>
           </Layout>
         </React.Fragment>

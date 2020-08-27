@@ -34,7 +34,7 @@ export default class App extends Component {
       <div>
         <Header />
         <LogoImg/>
-        <div style={{ minHeight: this.state.defaultHeight - 156 }}>
+        <div style={{ minHeight: this.state.defaultHeight - 260-165-20 }}>
           <RouteMap />
         </div>
 

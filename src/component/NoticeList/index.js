@@ -42,7 +42,7 @@ const NoticeList = (props) => {
 
   //记录选中的渠道id
   const queryChannelId = () => {
-    props.queryChannelId(channelId)
+    props.queryChannelId(channelId);
   };
 
   const [contentListState, setContentListState] = useState([]);
@@ -96,10 +96,23 @@ const NoticeList = (props) => {
               contentListState.map((item, index) => {
                 return (
                   <li className="single-item" key={index}>
-                    <div className="list-content">
-                      <span className="radio-icon"></span>
-                      {item.articleTitle}
-                    </div>
+                    {index === 0 ? (
+                      <Link  className='item-link'
+                        to={{
+                          pathname: `detail/${item.id}`,
+                        }}
+                      >
+                        <div className="list-content">
+                          <span className="radio-icon"></span>
+                          {item.articleTitle}
+                        </div>
+                      </Link>
+                    ) : (
+                      <div className="list-content">
+                        <span className="radio-icon"></span>
+                        {item.articleTitle}
+                      </div>
+                    )}
                     {timeParam ? (
                       <div className="list-time">{item.updateDate}</div>
                     ) : null}

@@ -10,3 +10,7 @@ export const showAllChannelUrl = "showAllChannel.do";
 //文章列表
 
 export const showArticleDirectoryUrl = "showArticleDirectory.do";
+
+//详情页
+
+export const showArticleDetailUrl = "showArticleDetail.do";
