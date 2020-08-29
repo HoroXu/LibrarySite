@@ -1,9 +1,9 @@
 import React, { Component, useState, useEffect } from "react";
 import "./index.less";
 import AxiosData from "@/utils/axios";
-import { showArticleDirectoryUrl,showDzdhChannelUrl } from "@/config/urls";
+import { showArticleDirectoryUrl, showDzdhChannelUrl } from "@/config/urls";
 import { Link } from "react-router-dom";
-import { queryChannelId } from "@/redux/Main/actions";
+import { queryChannelId, queryChannelInfo } from "@/redux/Main/actions";
 import { connect } from "react-redux";
 import SearchCitation from "@/assets/images/search-citation.jpg";
 import SearchNew from "@/assets/images/search-new.jpg";
@@ -22,10 +22,11 @@ const NoticeList = (props) => {
     widthParam,
     heightParam,
     channelId,
+    dzdhChannelProps,
   } = props;
 
   const [contentListState, setContentListState] = useState([]);
-  const [dzdhChannel,setDzdhChannel] = useState([])
+  const [dzdhChannel, setDzdhChannel] = useState([]);
 
   //获取文章列表
   const queryArticleDirectory = () => {
@@ -42,64 +43,25 @@ const NoticeList = (props) => {
       });
   };
 
-  //获取读者导航
-  const queryDzdhChannel = () => {
-    AxiosData.get(showDzdhChannelUrl)
-    .then((res)=>{
-      setDzdhChannel(res)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }
-
   //记录选中的渠道id
   const queryChannelId = () => {
     props.queryChannelId(channelId);
   };
 
+  //读者导航
+  const queryNavDzahChanne = () => {
+    props.queryChannelInfo(dzdhChannel);
+    queryChannelId()
+  };
 
-
+  useEffect(() => {
+    setDzdhChannel(dzdhChannelProps);
+  }, [dzdhChannelProps]);
 
   useEffect(() => {
     queryArticleDirectory();
-    queryDzdhChannel()
   }, []);
 
-  const navigationImgArr = [
-    {
-      imgSrc: SearchNew,
-      imgName: "查新服务",
-    },
-    {
-      imgSrc: ReaderRaining,
-      imgName: "读者培训",
-    },
-    {
-      imgSrc: PrecisionChecking,
-      imgName: "精准查重",
-    },
-    {
-      imgSrc: SearchCitation,
-      imgName: "查收查引",
-    },
-    {
-      imgSrc: MainBook,
-      imgName: "核心期刊",
-    },
-    {
-      imgSrc: InfoBriefing,
-      imgName: "信息简报",
-    },
-    {
-      imgSrc: Institutional,
-      imgName: "机构库",
-    },
-    {
-      imgSrc: SDISearch,
-      imgName: "定题检索",
-    },
-  ];
   return (
     <div className="notice-list-container mt15" style={{ width: widthParam }}>
       <h2 className="notice-list-header">{headerTitle}</h2>
@@ -124,7 +86,11 @@ const NoticeList = (props) => {
                         </div>
                       </Link>
                     ) : (
-                      <a href={item.articleOutChain} className='out-chain' target='_blank'>
+                      <a
+                        href={item.articleOutChain}
+                        className="out-chain"
+                        target="_blank"
+                      >
                         <div className="list-content">
                           <span className="radio-icon"></span>
                           {item.articleTitle}
@@ -154,12 +120,13 @@ const NoticeList = (props) => {
             return (
               <Link
                 to={{
-                  pathname: `moreTable/${item.imgName}`,
+                  pathname: `moreTable/${item.id}`,
                 }}
                 key={index}
+                onClick={queryNavDzahChanne}
               >
                 <div className="navigation-item">
-                  <img src={item.imgSrc} className="navigation-img" />
+                  <img src={item.iconSrc} className="navigation-img" />
                   <div className="img-name">{item.channelName}</div>
                 </div>
               </Link>
@@ -179,6 +146,9 @@ function mapDispatchToProps(dispatch) {
   return {
     queryChannelId: (val) => {
       dispatch(queryChannelId(val));
+    },
+    queryChannelInfo: (val) => {
+      dispatch(queryChannelInfo(val));
     },
   };
 }

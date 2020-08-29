@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from "react";
 import { Input, Tabs, Select } from "antd";
 import { connect } from "react-redux";
 import "./index.less";
-import { showArticleDirectoryUrl } from "@/config/urls";
+import { showDzdhChannelUrl } from "@/config/urls";
 import AxiosData from "@/utils/axios";
 import Keyword from "../../assets/images/keyword.png";
 import NoticeList from "../../component/NoticeList";
@@ -19,6 +19,8 @@ const tabArr = [
   { tabName: "节目检索", tabId: 4 },
 ];
 const SearchModule = (props) => {
+  const [dzdhChannel, setDzdhChannel] = useState([]);
+
   //计算组建宽度
   const queryWidthParam = (index) => {
     if (index < 3) {
@@ -39,8 +41,20 @@ const SearchModule = (props) => {
     }
   };
 
+  //获取读者导航
+  const queryDzdhChannel = () => {
+    AxiosData.get(showDzdhChannelUrl)
+      .then((res) => {
+        setDzdhChannel(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-
+  useEffect(() => {
+    queryDzdhChannel();
+  }, []);
 
   return (
     <div className="main-area">
@@ -90,6 +104,7 @@ const SearchModule = (props) => {
                 timeParam={false}
                 typeParam={queryTypeParam(index)}
                 channelId={item.id}
+                dzdhChannelProps={dzdhChannel}
                 // widthParam={250}
               />
             );
