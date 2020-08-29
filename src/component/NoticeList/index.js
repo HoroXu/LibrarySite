@@ -51,7 +51,7 @@ const NoticeList = (props) => {
   //读者导航
   const queryNavDzahChanne = () => {
     props.queryChannelInfo(dzdhChannel);
-    queryChannelId()
+    queryChannelId();
   };
 
   useEffect(() => {
@@ -73,7 +73,18 @@ const NoticeList = (props) => {
               contentListState.map((item, index) => {
                 return (
                   <li className="single-item" key={index}>
-                    {index === 0 ? (
+                    {index === 0 || index === 1 || index === 2 ? (
+                      <a
+                        href={item.articleOutChain}
+                        className="out-chain"
+                        target="_blank"
+                      >
+                        <div className="list-content">
+                          <span className="radio-icon"></span>
+                          {item.articleTitle}
+                        </div>
+                      </a>
+                    ) : (
                       <Link
                         className="item-link"
                         to={{
@@ -85,17 +96,6 @@ const NoticeList = (props) => {
                           {item.articleTitle}
                         </div>
                       </Link>
-                    ) : (
-                      <a
-                        href={item.articleOutChain}
-                        className="out-chain"
-                        target="_blank"
-                      >
-                        <div className="list-content">
-                          <span className="radio-icon"></span>
-                          {item.articleTitle}
-                        </div>
-                      </a>
                     )}
                     {timeParam ? (
                       <div className="list-time">{item.updateDate}</div>
@@ -120,7 +120,7 @@ const NoticeList = (props) => {
             return (
               <Link
                 to={{
-                  pathname: `moreTable/${item.id}`,
+                  pathname: `moreTable/${item.channelName}`,
                 }}
                 key={index}
                 onClick={queryNavDzahChanne}

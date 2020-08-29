@@ -22,3 +22,7 @@ export const showBottomDescUrl = "showBottomDesc.do";
 
 //导航
 export const showDzdhChannelUrl = 'showDzdhChannel.do'
+
+//背景图
+
+export const showBgUrl= 'showBg.do'

@@ -81,7 +81,7 @@ const MoreTable = (props) => {
         <span className="now-page">{judgeParam}</span>
       </div>
       <div className="more-table-content">
-        <Menu
+        {/* <Menu
           mode="inline"
           style={{ width: 185, marginRight: 40 }}
           onClick={(e) => switchTab(e)}
@@ -90,9 +90,9 @@ const MoreTable = (props) => {
           {channelInfoArr.map((item, index) => {
             return <Menu.Item key={item.id}>{item.channelName}</Menu.Item>;
           })}
-        </Menu>
+        </Menu> */}
         <div className="table-list-area">
-          {/* <h3 className="table-list-title">{judgeParam}</h3> */}
+          <h3 className="table-list-title">{judgeParam}</h3>
           <Table
             columns={columns}
             dataSource={contentListState}
