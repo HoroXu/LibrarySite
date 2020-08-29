@@ -42,7 +42,7 @@ const DetailPage = (props) => {
       <div className="detail-content">
         <h2 className="detail-title">{detailInfo.articleTitle}</h2>
         <div>{detailInfo.updateDate}</div>
-  <div className="detail-content">{detailInfo.content}</div>
+        <div className="detail-content">{detailInfo.content}</div>
         <div className="name-area">签名区域</div>
       </div>
       {/* <Bottom/> */}

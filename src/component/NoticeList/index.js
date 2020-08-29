@@ -1,7 +1,7 @@
 import React, { Component, useState, useEffect } from "react";
 import "./index.less";
 import AxiosData from "@/utils/axios";
-import { showArticleDirectoryUrl } from "@/config/urls";
+import { showArticleDirectoryUrl,showDzdhChannelUrl } from "@/config/urls";
 import { Link } from "react-router-dom";
 import { queryChannelId } from "@/redux/Main/actions";
 import { connect } from "react-redux";
@@ -24,8 +24,10 @@ const NoticeList = (props) => {
     channelId,
   } = props;
 
-  //获取文章列表
+  const [contentListState, setContentListState] = useState([]);
+  const [dzdhChannel,setDzdhChannel] = useState([])
 
+  //获取文章列表
   const queryArticleDirectory = () => {
     AxiosData.get(showArticleDirectoryUrl, {
       channelId,
@@ -40,15 +42,28 @@ const NoticeList = (props) => {
       });
   };
 
+  //获取读者导航
+  const queryDzdhChannel = () => {
+    AxiosData.get(showDzdhChannelUrl)
+    .then((res)=>{
+      setDzdhChannel(res)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }
+
   //记录选中的渠道id
   const queryChannelId = () => {
     props.queryChannelId(channelId);
   };
 
-  const [contentListState, setContentListState] = useState([]);
+
+
 
   useEffect(() => {
     queryArticleDirectory();
+    queryDzdhChannel()
   }, []);
 
   const navigationImgArr = [
@@ -97,7 +112,8 @@ const NoticeList = (props) => {
                 return (
                   <li className="single-item" key={index}>
                     {index === 0 ? (
-                      <Link  className='item-link'
+                      <Link
+                        className="item-link"
                         to={{
                           pathname: `detail/${item.id}`,
                         }}
@@ -108,10 +124,12 @@ const NoticeList = (props) => {
                         </div>
                       </Link>
                     ) : (
-                      <div className="list-content">
-                        <span className="radio-icon"></span>
-                        {item.articleTitle}
-                      </div>
+                      <a href={item.articleOutChain} className='out-chain' target='_blank'>
+                        <div className="list-content">
+                          <span className="radio-icon"></span>
+                          {item.articleTitle}
+                        </div>
+                      </a>
                     )}
                     {timeParam ? (
                       <div className="list-time">{item.updateDate}</div>
@@ -132,7 +150,7 @@ const NoticeList = (props) => {
         </div>
       ) : (
         <div className="navigation-container">
-          {navigationImgArr.map((item, index) => {
+          {dzdhChannel.map((item, index) => {
             return (
               <Link
                 to={{
@@ -142,7 +160,7 @@ const NoticeList = (props) => {
               >
                 <div className="navigation-item">
                   <img src={item.imgSrc} className="navigation-img" />
-                  <div className="img-name">{item.imgName}</div>
+                  <div className="img-name">{item.channelName}</div>
                 </div>
               </Link>
             );

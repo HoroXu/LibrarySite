@@ -12,5 +12,13 @@ export const showAllChannelUrl = "showAllChannel.do";
 export const showArticleDirectoryUrl = "showArticleDirectory.do";
 
 //详情页
-
 export const showArticleDetailUrl = "showArticleDetail.do";
+
+//导航
+export const showHeadChannelUrl = "showHeadChannel.do";
+
+//底部数据
+export const showBottomDescUrl = "showBottomDesc.do";
+
+//导航
+export const showDzdhChannelUrl = 'showDzdhChannel.do'
