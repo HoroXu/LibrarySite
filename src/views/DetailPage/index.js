@@ -48,7 +48,7 @@ const DetailPage = (props) => {
         >
           {/* {detailInfo.content} */}
         </div>
-        <div className="name-area">签名区域</div>
+        {/* <div className="name-area">签名区域</div> */}
       </div>
       {/* <Bottom/> */}
     </div>

@@ -73,7 +73,9 @@ const NoticeList = (props) => {
               contentListState.map((item, index) => {
                 return (
                   <li className="single-item" key={index}>
-                    {index === 0 || index === 1 || index === 2 ? (
+                    {item.channelIndex === 3 ||
+                    item.channelIndex === 1 ||
+                    item.channelIndex === 2 ? (
                       <a
                         href={item.articleOutChain}
                         className="out-chain"
