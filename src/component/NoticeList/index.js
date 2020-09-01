@@ -5,14 +5,7 @@ import { showArticleDirectoryUrl, showDzdhChannelUrl } from "@/config/urls";
 import { Link } from "react-router-dom";
 import { queryChannelId, queryChannelInfo } from "@/redux/Main/actions";
 import { connect } from "react-redux";
-import SearchCitation from "@/assets/images/search-citation.jpg";
-import SearchNew from "@/assets/images/search-new.jpg";
-import InfoBriefing from "@/assets/images/info-briefing.jpg";
-import Institutional from "@/assets/images/institutional.jpg";
-import MainBook from "@/assets/images/main-book.jpg";
-import PrecisionChecking from "@/assets/images/precision-checking.jpg";
-import ReaderRaining from "@/assets/images/reader-raining.jpg";
-import SDISearch from "@/assets/images/SDI-search.jpg";
+import moment from "moment";
 
 const NoticeList = (props) => {
   const {
@@ -100,7 +93,9 @@ const NoticeList = (props) => {
                       </Link>
                     )}
                     {timeParam ? (
-                      <div className="list-time">{item.updateDate}</div>
+                      <div className="list-time">
+                        {moment(item.updateDate).format("YYYY-MM-DD")}
+                      </div>
                     ) : null}
                   </li>
                 );
@@ -154,7 +149,4 @@ function mapDispatchToProps(dispatch) {
     },
   };
 }
-export default connect(
-  mapToStateFromProps,
-  mapDispatchToProps
-)(NoticeList);
+export default connect(mapToStateFromProps, mapDispatchToProps)(NoticeList);

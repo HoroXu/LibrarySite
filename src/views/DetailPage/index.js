@@ -31,7 +31,7 @@ const DetailPage = (props) => {
   }, []);
   return (
     <div className="detail-page-area">
-      <Header />
+      {/* <Header /> */}
       <Banner />
       {/* <div className="position-area">
         <span>当前位置：</span>
@@ -39,7 +39,7 @@ const DetailPage = (props) => {
         <span className="now-page">{judgeParam}</span>
       </div> */}
 
-      <BreadcrumbCom judgeParam ={judgeParam}/>
+      <BreadcrumbCom judgeParam ='详情'/>
 
       <div className="detail-content">
         <h2 className="detail-title">{detailInfo.articleTitle}</h2>

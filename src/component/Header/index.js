@@ -6,6 +6,7 @@ import { showHeadChannelUrl } from "@/config/urls";
 
 const Header = () => {
   const [headChannelInfo, setHeadChannelInfo] = useState([]);
+  const [activeName, setActiveName] = useState("首页");
   const queryShowHeadChannelUrl = () => {
     AxiosData.get(showHeadChannelUrl)
       .then((res) => {
@@ -17,6 +18,10 @@ const Header = () => {
       });
   };
 
+  const switchMenu = (name) => {
+    setActiveName(name);
+  };
+
   useEffect(() => {
     queryShowHeadChannelUrl();
   }, []);
@@ -24,15 +29,28 @@ const Header = () => {
     <div className="library-bottom">
       <div className="library-bottom-inner">
         <div className="left-info menuFont">
-          <span className="menu-item ">首页</span>
+          <span
+            className={`menu-item ${
+              activeName === "首页" ? "active-menu" : ""
+            }`}
+          >
+            首页
+          </span>
           {headChannelInfo.map((item, index) => {
             return (
               <Link
                 to={{
                   pathname: `detail/${item.id}`,
                 }}
+                onClick={() => switchMenu(item.channelName)}
               >
-                <span className="menu-item">{item.channelName}</span>
+                <span
+                  className={`menu-item ${
+                    activeName === item.channelName ? "active-menu" : ""
+                  }`}
+                >
+                  {item.channelName}
+                </span>
               </Link>
             );
           })}

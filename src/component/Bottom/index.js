@@ -20,7 +20,7 @@ const Bottom = () => {
   }, []);
   return (
     <div className="copy-right">
-      <p>{bottomDesc.coptRight}</p>
+      <p>{bottomDesc.copyright}</p>
       <p>{bottomDesc.addr}</p>
       <p>{bottomDesc.tech}</p>
     </div>

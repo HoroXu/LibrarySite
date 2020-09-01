@@ -101,7 +101,11 @@ const SearchModule = (props) => {
               <NoticeList
                 headerTitle={item.channelName}
                 widthParam={queryWidthParam(index)}
-                timeParam={false}
+                timeParam={
+                  index === 0 || index === 1 || index === 2 || index === 3
+                    ? false
+                    : true
+                }
                 typeParam={queryTypeParam(index)}
                 channelId={item.id}
                 dzdhChannelProps={dzdhChannel}
@@ -127,7 +131,4 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(SearchModule);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchModule);
