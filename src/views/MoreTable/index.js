@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import { Menu, Pagination, Table } from "antd";
+import { Menu, Pagination, Table, Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
 import AxiosData from "@/utils/axios";
 import moment from "moment";
+import BreadcrumbCom from "@/component/BreadcrumbCom";
 import { showArticleDirectoryUrl } from "@/config/urls";
 import "./index.less";
 
 const MoreTable = (props) => {
-
   const { channelId, channelInfoArr } = props;
   const [contentListState, setContentListState] = useState([]);
   const [pageNum, setPageNum] = useState("1");
@@ -69,17 +69,19 @@ const MoreTable = (props) => {
   };
 
   useEffect(() => {
-    console.log(channelId,'初始化进来====moretable')
+    console.log(channelId, "初始化进来====moretable");
     queryArticleDirectory(channelId, "1");
   }, []);
 
   return (
     <div className="more-table-container">
-      <div className="position-area">
+      {/* <div className="position-area">
         <span>当前位置：</span>
         <span className="first-page">图书馆首页</span>
         <span className="now-page">{judgeParam}</span>
-      </div>
+      </div> */}
+
+      <BreadcrumbCom judgeParam={judgeParam} />
       <div className="more-table-content">
         {/* <Menu
           mode="inline"
