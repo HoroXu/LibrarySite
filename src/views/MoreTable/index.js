@@ -21,8 +21,16 @@ const MoreTable = (props) => {
       title: "标题",
       dataIndex: "articleTitle",
       render: (text, record) => {
-        return (
-          <Link to="/" className="title-style">
+        return record.articleOutChain ? (
+          <a
+            href={record.articleOutChain}
+            className="out-chain"
+            target="_blank"
+          >
+            {text}
+          </a>
+        ) : (
+          <Link to={`/detail/${record.id}`} className="title-style">
             {text}
           </Link>
         );
@@ -75,12 +83,6 @@ const MoreTable = (props) => {
 
   return (
     <div className="more-table-container">
-      {/* <div className="position-area">
-        <span>当前位置：</span>
-        <span className="first-page">图书馆首页</span>
-        <span className="now-page">{judgeParam}</span>
-      </div> */}
-
       <BreadcrumbCom judgeParam={judgeParam} />
       <div className="more-table-content">
         {/* <Menu
@@ -122,7 +124,4 @@ function mapDispatchToProps(dispatch) {
   return {};
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(MoreTable);
+export default connect(mapStateToProps, mapDispatchToProps)(MoreTable);

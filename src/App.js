@@ -9,32 +9,29 @@ import RouteMap from "./Route";
 import { connect } from "react-redux";
 import Bottom from "./component/Bottom";
 import Header from "./component/Header";
-import LogoImg from './component/LogoImg'
-import SideBar from './component/SideBar'
+import LogoImg from "./component/LogoImg";
+import SideBar from "./component/SideBar";
 
-@connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
+@connect(mapStateToProps, mapDispatchToProps)
 export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultHeight: ""
+      defaultHeight: "",
     };
   }
   componentDidMount() {
     this.setState({
-      defaultHeight: document.body.clientHeight
+      defaultHeight: document.body.clientHeight,
     });
   }
   render() {
     console.log(this.state.defaultHeight, "默认高速-======");
     return (
-      <div>
+      <div className="chushi-style">
         <Header />
-        <LogoImg/>
-        <div style={{ minHeight: this.state.defaultHeight - 260-165-20 }}>
+        <LogoImg />
+        <div style={{ minHeight: this.state.defaultHeight - 260 - 165 - 20 }}>
           <RouteMap />
         </div>
 

@@ -31,19 +31,9 @@ const App = (props) => {
       <Switch>
         <React.Fragment>
           <Route exact path="/" component={SearchModule} />
-
           <Layout>
             <div className="dip-content">
-              {/* <Route path="/" component={SearchModule} /> */}
-              
               <Route path="/moreTable" component={MoreTable} />
-
-              {/* 关于我们 */}
-              <Route path="/aboutUs" component={MoreTable} />
-
-              {/* 入馆指南 */}
-              <Route path="/handbook" component={MoreTable} />
-
               {/* 详情页面 */}
               <Route path="/detail" component={DetailPage} />
             </div>
@@ -66,7 +56,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

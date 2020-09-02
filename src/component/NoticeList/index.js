@@ -64,11 +64,9 @@ const NoticeList = (props) => {
             {contentListState &&
               contentListState.length > 0 &&
               contentListState.map((item, index) => {
-                return (
+                return index <= 6 ? (
                   <li className="single-item" key={index}>
-                    {item.channelIndex === 3 ||
-                    item.channelIndex === 1 ||
-                    item.channelIndex === 2 ? (
+                    {item.articleOutChain ? (
                       <a
                         href={item.articleOutChain}
                         className="out-chain"
@@ -80,12 +78,7 @@ const NoticeList = (props) => {
                         </div>
                       </a>
                     ) : (
-                      <Link
-                        className="item-link"
-                        to={{
-                          pathname: `detail/${item.id}`,
-                        }}
-                      >
+                      <Link className="item-link" to={`detail/${item.id}`}>
                         <div className="list-content">
                           <span className="radio-icon"></span>
                           {item.articleTitle}
@@ -98,14 +91,10 @@ const NoticeList = (props) => {
                       </div>
                     ) : null}
                   </li>
-                );
+                ) : null;
               })}
           </ul>
-          <Link
-            to={{
-              pathname: `moreTable/${headerTitle}`,
-            }}
-          >
+          <Link to={`moreTable/${headerTitle}`}>
             <div className="see-more" onClick={queryChannelId}>
               MORE &gt;&gt;
             </div>
@@ -116,9 +105,7 @@ const NoticeList = (props) => {
           {dzdhChannel.map((item, index) => {
             return (
               <Link
-                to={{
-                  pathname: `moreTable/${item.channelName}`,
-                }}
+                to={`moreTable/${item.channelName}`}
                 key={index}
                 onClick={queryNavDzahChanne}
               >

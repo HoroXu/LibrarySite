@@ -39,9 +39,7 @@ const Header = () => {
           {headChannelInfo.map((item, index) => {
             return (
               <Link
-                to={{
-                  pathname: `detail/${item.id}`,
-                }}
+                to={`detail/${item.id}`}
                 onClick={() => switchMenu(item.channelName)}
               >
                 <span
