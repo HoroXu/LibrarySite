@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import "./index.less";
 import { showLogoUrl } from "@/config/urls";
 import AxiosData from "@/utils/axios";
-import LogoImg from "../../assets/images/logo-img.jpg";
 
 const LogoImgComponent = () => {
 
@@ -24,7 +23,7 @@ const LogoImgComponent = () => {
   }, []);
   return (
     <div className="library-logo-img">
-      <img className="img-area" src={LogoImg} />
+      <img className="img-area" src={logoImg} />
     </div>
   );
 };

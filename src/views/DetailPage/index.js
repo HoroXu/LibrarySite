@@ -28,7 +28,7 @@ const DetailPage = (props) => {
 
   useEffect(() => {
     queryShowArticleDetail();
-  }, []);
+  }, [judgeParam]);
   return (
     <div className="detail-page-area">
       {/* <Header /> */}

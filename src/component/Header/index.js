@@ -29,17 +29,20 @@ const Header = () => {
     <div className="library-bottom">
       <div className="library-bottom-inner">
         <div className="left-info menuFont">
-          <span
-            className={`menu-item ${
-              activeName === "首页" ? "active-menu" : ""
-            }`}
-          >
-            首页
-          </span>
+          <Link to="/">
+            <span
+              className={`menu-item ${
+                activeName === "首页" ? "active-menu" : ""
+              }`}
+            >
+              首页
+            </span>
+          </Link>
+
           {headChannelInfo.map((item, index) => {
             return (
               <Link
-                to={`detail/${item.id}`}
+                to={`/detail/${item.id}`}
                 onClick={() => switchMenu(item.channelName)}
               >
                 <span
