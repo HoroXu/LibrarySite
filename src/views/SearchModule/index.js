@@ -2,7 +2,8 @@ import React, { Component, useState, useEffect } from "react";
 import { Input, Tabs, Select } from "antd";
 import { connect } from "react-redux";
 import "./index.less";
-import { showDzdhChannelUrl } from "@/config/urls";
+import { showDzdhChannelUrl, showAllChannelUrl } from "@/config/urls";
+import { queryChannelInfo } from "@/redux/Main/actions";
 import AxiosData from "@/utils/axios";
 import Keyword from "../../assets/images/keyword.png";
 import NoticeList from "../../component/NoticeList";
@@ -41,6 +42,17 @@ const SearchModule = (props) => {
     }
   };
 
+  //获取渠道信息
+  const queryShowAllChannel = () => {
+    AxiosData.get(showAllChannelUrl)
+      .then((res) => {
+        props.queryChannelInfo(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   //获取读者导航
   const queryDzdhChannel = () => {
     AxiosData.get(showDzdhChannelUrl)
@@ -54,6 +66,7 @@ const SearchModule = (props) => {
 
   useEffect(() => {
     queryDzdhChannel();
+    queryShowAllChannel();
   }, []);
 
   return (
@@ -128,7 +141,11 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return {};
+  return {
+    queryChannelInfo: (val) => {
+      dispatch(queryChannelInfo(val));
+    },
+  };
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchModule);

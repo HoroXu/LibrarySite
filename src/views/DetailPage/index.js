@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./index.less";
 import Header from "@/component/Header";
 import Banner from "@/component/Banner";
-import BreadcrumbCom from '@/component/BreadcrumbCom'
+import BreadcrumbCom from "@/component/BreadcrumbCom";
 import AxiosData from "@/utils/axios";
 import { showArticleDetailUrl } from "@/config/urls";
 // import Bottom from "@/component/Bottom";
@@ -25,7 +25,7 @@ const DetailPage = (props) => {
         console.log(err);
       });
   };
-
+  //路由参数变化 函数执行
   useEffect(() => {
     queryShowArticleDetail();
   }, [judgeParam]);
@@ -39,7 +39,7 @@ const DetailPage = (props) => {
         <span className="now-page">{judgeParam}</span>
       </div> */}
 
-      <BreadcrumbCom judgeParam ='详情'/>
+      <BreadcrumbCom judgeParam="详情" />
 
       <div className="detail-content">
         <h2 className="detail-title">{detailInfo.articleTitle}</h2>

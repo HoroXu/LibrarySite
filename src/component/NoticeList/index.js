@@ -1,7 +1,11 @@
 import React, { Component, useState, useEffect } from "react";
 import "./index.less";
 import AxiosData from "@/utils/axios";
-import { showArticleDirectoryUrl, showDzdhChannelUrl } from "@/config/urls";
+import {
+  showArticleDirectoryUrl,
+  showDzdhChannelUrl,
+
+} from "@/config/urls";
 import { Link } from "react-router-dom";
 import { queryChannelId, queryChannelInfo } from "@/redux/Main/actions";
 import { connect } from "react-redux";
@@ -20,6 +24,8 @@ const NoticeList = (props) => {
 
   const [contentListState, setContentListState] = useState([]);
   const [dzdhChannel, setDzdhChannel] = useState([]);
+
+
 
   //获取文章列表
   const queryArticleDirectory = () => {
@@ -52,6 +58,7 @@ const NoticeList = (props) => {
   }, [dzdhChannelProps]);
 
   useEffect(() => {
+    
     queryArticleDirectory();
   }, []);
 
@@ -107,7 +114,7 @@ const NoticeList = (props) => {
               <Link
                 to={`moreTable/${item.channelName}`}
                 key={index}
-                onClick={queryNavDzahChanne}
+                // onClick={queryNavDzahChanne}
               >
                 <div className="navigation-item">
                   <img src={item.iconSrc} className="navigation-img" />
