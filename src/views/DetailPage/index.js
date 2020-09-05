@@ -43,7 +43,7 @@ const DetailPage = (props) => {
 
       <div className="detail-content">
         <h2 className="detail-title">{detailInfo.articleTitle}</h2>
-        <div>{detailInfo.updateDate}</div>
+        <div className="time">{detailInfo.updateDate}</div>
         <div
           className="detail-content"
           dangerouslySetInnerHTML={{ __html: detailInfo.content }}
