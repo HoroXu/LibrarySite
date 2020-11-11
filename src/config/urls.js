@@ -29,4 +29,7 @@ export const showBgUrl = 'showBg.do';
 
 //查询链接
 
-export const showSearchUrl = 'showSearchURL.do';
+export const showSearchUrl = 'showSearchURL.do'
+
+//知网地址查询
+export const oauthUrl = 'oauth.do'

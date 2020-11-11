@@ -1,33 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Input, Tabs, Select, message } from 'antd';
-import { connect } from 'react-redux';
-import './index.less';
+import React, { useState, useEffect } from "react";
+import { Input, Tabs, Select, message } from "antd";
+import { connect } from "react-redux";
+import "./index.less";
 import {
   showDzdhChannelUrl,
   showAllChannelUrl,
   showSearchUrl,
-} from '@/config/urls';
-import { queryChannelInfo } from '@/redux/Main/actions';
-import AxiosData from '@/utils/axios';
-import Keyword from '../../assets/images/keyword.png';
-import NoticeList from '../../component/NoticeList';
-import CopyImg from '@/component/CopyImg';
+  oauthUrl,
+} from "@/config/urls";
+import { queryChannelInfo } from "@/redux/Main/actions";
+import AxiosData from "@/utils/axios";
+import Keyword from "../../assets/images/keyword.png";
+import NoticeList from "../../component/NoticeList";
+import CopyImg from "@/component/CopyImg";
 
 const InputGroup = Input.Group;
 const { Option } = Select;
 const { Search } = Input;
 const { TabPane } = Tabs;
 const tabArr = [
-  { tabName: '知网', tabId: 1 },
-  { tabName: '泉方学术搜索', tabId: 2 },
-  { tabName: '本地PubMed', tabId: 3 },
-  { tabName: '节目检索', tabId: 4 },
+  { tabName: "知网", tabId: 1 },
+  { tabName: "泉方学术搜索", tabId: 2 },
+  { tabName: "本地PubMed", tabId: 3 },
+  { tabName: "节目检索", tabId: 4 },
 ];
 const SearchModule = (props) => {
   const [dzdhChannel, setDzdhChannel] = useState([]);
   const [searchUrl, setSearchUrl] = useState({});
-  const [searchVal, setSearchVal] = useState('');
-  const [searchOption, setSearchOption] = useState('1');
+  const [searchVal, setSearchVal] = useState("");
+  const [searchOption, setSearchOption] = useState("1");
+  const [oauthData, setOauthData] = useState("");
   //计算组建宽度
   const queryWidthParam = (index) => {
     if (index < 3) {
@@ -83,18 +85,22 @@ const SearchModule = (props) => {
 
   //检索方法
   const searchFn = (value) => {
-    console.log(value, '====');
+    console.log(value, "====");
     if (value) {
-      if (searchOption === '1') {
-        window.open(
-          'http://search--chkd--cnki--net--http.cnki.resource.jsph.org.cn:2222/kns/Brief/singleResult.aspx?code=CHKD&kw=' +
-            value,
-        );
+      if (searchOption === "1") {
+        if (oauthData) {
+          window.open(oauthData);
+        } else {
+          window.open(
+            "http://search--chkd--cnki--net--http.cnki.resource.jsph.org.cn:2222/kns/Brief/singleResult.aspx?code=CHKD&kw=" +
+              value
+          );
+        }
       } else {
         window.open(searchUrl[searchOption] + value);
       }
     } else {
-      message.warning('请输入检索词');
+      message.warning("请输入检索词");
       return;
     }
 
@@ -106,10 +112,24 @@ const SearchModule = (props) => {
     console.log(value);
   };
 
+  //获取知网地址
+  const queryOauth = () => {
+    AxiosData.get(oauthUrl)
+      .then((res) => {
+        if (res.status === "200") {
+          setOauthData(res.message);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   useEffect(() => {
     queryDzdhChannel();
     queryShowAllChannel();
     querySearchUrl();
+    queryOauth();
   }, []);
 
   return (
