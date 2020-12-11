@@ -24,7 +24,7 @@ const NoticeList = (props) => {
   //获取文章列表
   const queryArticleDirectory = () => {
     AxiosData.get(showArticleDirectoryUrl, {
-      channelId,
+      channelId: channelId,
       currentPage: 1,
     })
       .then((res) => {

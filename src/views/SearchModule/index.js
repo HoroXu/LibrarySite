@@ -7,8 +7,9 @@ import {
   showAllChannelUrl,
   showSearchUrl,
   oauthUrl,
+  newSearchUrl,
 } from "@/config/urls";
-import { queryChannelInfo } from "@/redux/Main/actions";
+import { queryChannelInfo, queryChannelId } from "@/redux/Main/actions";
 import AxiosData from "@/utils/axios";
 import Keyword from "../../assets/images/keyword.png";
 import NoticeList from "../../component/NoticeList";
@@ -87,18 +88,9 @@ const SearchModule = (props) => {
   const searchFn = (value) => {
     console.log(value, "====");
     if (value) {
-      if (searchOption === "1") {
-        if (oauthData) {
-          window.open(oauthData);
-        } else {
-          window.open(
-            "http://search--chkd--cnki--net--http.cnki.resource.jsph.org.cn:2222/kns/Brief/singleResult.aspx?code=CHKD&kw=" +
-              value
-          );
-        }
-      } else {
-        window.open(searchUrl[searchOption] + value);
-      }
+      window.localStorage.setItem("searchVal", value);
+      window.localStorage.setItem("channelId", 13);
+      props.history.push("/moreTable/通知公告");
     } else {
       message.warning("请输入检索词");
       return;
@@ -137,7 +129,7 @@ const SearchModule = (props) => {
       <div className="search-module-area">
         <div className="search-module-container">
           <InputGroup compact className="input-group-container">
-            <Select
+            {/* <Select
               defaultValue="1"
               size="large"
               style={{ width: 150 }}
@@ -145,12 +137,12 @@ const SearchModule = (props) => {
             >
               <Option value="1">知网</Option>
               <Option value="qfxs">泉方学术搜索</Option>
-              <Option value="pubmed">本地PubMed</Option>
-              {/* <Option value="4">节目检索</Option> */}
-            </Select>
+              <Option value="pubmed">本地PubMed</Option> */}
+            {/* <Option value="4">节目检索</Option> */}
+            {/* </Select> */}
             <Search
               placeholder="请输入关键字..."
-              enterButton="检索"
+              enterButton="检索网站"
               size="large"
               onSearch={searchFn}
               style={{ width: 490 }}
@@ -196,6 +188,9 @@ function mapDispatchToProps(dispatch) {
   return {
     queryChannelInfo: (val) => {
       dispatch(queryChannelInfo(val));
+    },
+    queryChannelId: (val) => {
+      dispatch(queryChannelId(val));
     },
   };
 }

@@ -57,8 +57,9 @@ const MoreTable = (props) => {
   //获取文章列表
   const queryArticleDirectory = (channelId, currentPage) => {
     AxiosData.get(showArticleDirectoryUrl, {
-      channelId,
+      channelId: channelId || window.localStorage.getItem("channelId"),
       currentPage,
+      p: window.localStorage.getItem("searchVal")
     })
       .then((res) => {
         console.log(res);
